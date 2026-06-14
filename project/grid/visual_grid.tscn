@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cykasydref7gy"]
+
+[ext_resource type="CylinderMesh" uid="uid://dwgbrl13p45ri" path="res://grid/hex_mesh.tres" id="1_r7d1c"]
+[ext_resource type="Script" uid="uid://cjph38u7m00le" path="res://grid/grid_multimesh.gd" id="2_tw7q8"]
+
+[sub_resource type="MultiMesh" id="MultiMesh_tw7q8"]
+instance_count = 7
+mesh = ExtResource("1_r7d1c")
+buffer = PackedFloat32Array(5.5, 2.9999998, 1, 1, 1, 0.225, 0.1875, 0.004144427, 5.690301, 2.0432916, 1, 1, 1, 0.225, 0.21128762, 0.003153175, 6.232233, 1.2322333, 1, 1, 1, 0.225, 0.27902913, 0.0023128323, 7.043291, 0.6903012, 1, 1, 1, 0.225, 0.3804114, 0.0017513327, 8, 0.5, 1, 1, 1, 0.225, 0.5, 0.0015541603, 8, 0.5, 1, 1, 1, 0.225, 0.5, 0.0015541603, 8.956709, 0.6903014, 1, 1, 1, 0.225, 0.6195886, 0.0017513329)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ib0x2"]
+frequency = 0.0096
+
+[node name="VisualGrid" type="Node3D" unique_id=684804319]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=572793609]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33366656, 0.31448555, -1.1805898)
+light_energy = 0.373
+shadow_enabled = true
+
+[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="." unique_id=2135074541]
+multimesh = SubResource("MultiMesh_tw7q8")
+script = ExtResource("2_tw7q8")
+height_map = SubResource("FastNoiseLite_ib0x2")

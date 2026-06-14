@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dgdo4pcvkx44k"]
+
+[ext_resource type="Script" uid="uid://dkr0f7g6ox5ta" path="res://camera/camera_scroll.gd" id="1_2gvce"]
+
+[node name="CameraScroll" type="Node" unique_id=1810605879]
+script = ExtResource("1_2gvce")

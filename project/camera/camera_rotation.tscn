@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://3jdqlytl3nfr"]
+
+[ext_resource type="Script" uid="uid://77hy8d8e3im7" path="res://camera/camera_rotation.gd" id="1_x5wyx"]
+
+[node name="CameraRotation" type="Node" unique_id=1520576587]
+script = ExtResource("1_x5wyx")

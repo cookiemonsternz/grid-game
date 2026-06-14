@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://bpcv5w58dnvjt"]
+
+[ext_resource type="Script" uid="uid://d12m1j4xg7x0d" path="res://camera/camera.gd" id="1_0lfnk"]
+[ext_resource type="Script" uid="uid://d3kyskhqovu1k" path="res://scripts/grid_server/grid_node_3d.gd" id="1_gsf7k"]
+[ext_resource type="PackedScene" uid="uid://chrr4fo888yec" path="res://camera/camera_movement.tscn" id="1_xejhd"]
+[ext_resource type="PackedScene" uid="uid://3jdqlytl3nfr" path="res://camera/camera_rotation.tscn" id="3_0lfnk"]
+[ext_resource type="PackedScene" uid="uid://dgdo4pcvkx44k" path="res://camera/camera_scroll.tscn" id="5_qypm7"]
+
+[sub_resource type="Curve3D" id="Curve3D_fpb5e"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 1, 2, 0, 0, 0, 0, -4, -4.5, 0, -0.019003868, 3.5408854, 0, 8, 8),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[node name="Camera" type="Node3D" unique_id=1452653236]
+script = ExtResource("1_0lfnk")
+metadata/_custom_type_script = "uid://d3kyskhqovu1k"
+
+[node name="PitchPivot" type="Node3D" parent="." unique_id=420135213]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 4)
+script = ExtResource("1_gsf7k")
+metadata/_custom_type_script = "uid://d3kyskhqovu1k"
+
+[node name="CameraPath" type="Path3D" parent="PitchPivot" unique_id=1292778304]
+curve = SubResource("Curve3D_fpb5e")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="PitchPivot/CameraPath" unique_id=436953511]
+transform = Transform3D(1, -3.9096136e-08, 7.819227e-08, 0, 0.8944153, 0.4472077, -8.742278e-08, -0.4472077, 0.8944153, 0, 0, 0)
+use_model_front = true
+
+[node name="Camera3D" type="Camera3D" parent="PitchPivot/CameraPath/PathFollow3D" unique_id=11760929]
+current = true
+
+[node name="CameraMovement" parent="." unique_id=384165374 node_paths=PackedStringArray("target") instance=ExtResource("1_xejhd")]
+target = NodePath("..")
+speed = 10.0
+
+[node name="CameraRotation" parent="." unique_id=1520576587 node_paths=PackedStringArray("target", "pivot_yaw", "pivot_pitch") instance=ExtResource("3_0lfnk")]
+target = NodePath("..")
+pivot_yaw = NodePath("..")
+pivot_pitch = NodePath("../PitchPivot")
+soft_limit = true
+soft_limit_amount = 25.0
+min_pitch = -45.0
+max_pitch = 45.0
+
+[node name="CameraScroll" parent="." unique_id=1810605879 node_paths=PackedStringArray("target") instance=ExtResource("5_qypm7")]
+target = NodePath("../PitchPivot/CameraPath/PathFollow3D")
+scroll_amount = 0.1
